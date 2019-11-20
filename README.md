@@ -5,7 +5,7 @@
 #### 변경사항
 * 프로젝트 생성
   * controller, domain, mapper, service 패키지 만들고 memberVO 생성
-  * webapp/resources 아래에 css,images,scripts,uploads 폴더 생성
+  * webapp/resources 아래에 css, images, scripts, uploads 폴더 생성
 * xml파일
   * pom.xml 수정 (메이븐 라이브러리 추가)
     * spring-jdbc
@@ -21,15 +21,19 @@
     * lombok
     * HikariCP
     * mysql-connector-java
-  * web.xml 수정 (post 한글 인코딩 필터 설정)
+  * web.xml 수정
+    * post 한글 인코딩 필터 설정
   * root-context.xml 수정
     * hikariCoinfig 설정 (mySql 아이디, 비밀번호, 기본스키마)
     * mybatis 경로(mapper) 설정
     * service 경로 설정
   * servlet-context.xml 수정
     * 쓸지안쓸진 모르지만 파일업로드 세팅 해놓음
-  * mybatis-config.xml 생성 (카멜케이스, 도메인(VO)경로 설정)
-  * log4j.xml 수정 (warn -> info)
+  * mybatis-config.xml 생성
+    * 카멜케이스
+    * 도메인(VO)경로 설정
+  * log4j.xml 수정
+    * warn -> info
 * 테이블 생성
   * asd-DDL.sql 파일 생성
 
