@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="패키지명.클래스명" -->
+<mapper namespace="com.exam.mapper.MemberMapper">
+	<!-- id="메서드명" parameterType="패키지.자료형클래스" -->
+	<insert id="insertMember" parameterType="MemberVO">
+	 	<!-- Sql문 -->
+		<!-- #{} : PreparedStatement.getter(값 대치), ${} : Statement.getter(컬럼명, 테이블명, 문장 등 불변속성 대치) -->
+	</insert>
+</mapper>

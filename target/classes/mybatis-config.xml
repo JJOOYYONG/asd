@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	
+	<typeAliases>
+		<!-- 위에처럼 일일히 등록하지 않아도 패키지 경로 안의 클래스이름으로 등록됨 -->
+		<package name="com.exam.domain" />
+	</typeAliases>
+	
+</configuration>
