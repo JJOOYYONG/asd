@@ -1,5 +1,28 @@
 # PROJECT 아싶다
 
+### 2019-11-26 22:50 Service, Mapper 구현중
+
+#### 변경사항
+* Table 추가
+  * mem_img(프로필이미지 테이블)
+    * pk_uuid
+    * fk_email
+* Mapper 추가
+  * memberMapper - 완성
+  * memImgMapper - 미완
+* Service 추가
+  * memberService - 미완
+
+#### 주의할 이슈
+* 각종 service들 테스트 필요
+  * 테스트용 view 구현 (미완성)
+    * form (입력, 수정)
+    * 조회, 삭제 기능
+  * 테스트용 controller 구현 (미완성)
+    * postMapping
+
+--------------------------------------------------------------------
+
 ### 2019-11-20 23:27 환경설정 완료
 
 #### 변경사항
