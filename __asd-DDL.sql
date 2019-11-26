@@ -19,10 +19,10 @@ CREATE TABLE MEMBERS
 (	EMAIL VARCHAR(30) NOT NULL, -- 실제 로그인에 쓰이는 아이디
 PASSWD VARCHAR(20) NOT NULL,
 USERNAME VARCHAR(20) NOT NULL, -- 닉네임(보여지는 이름)
-REG_DATE DATE NOT NULL,
-AGE INT NOT NULL,
-RESIDENT_ID INT NOT NULL, -- 주민등록번호
-GENDER VARCHAR(6) NOT NULL,
+REG_DATE DATE NOT NULL,   -- * 수정불가항목
+AGE INT NOT NULL,         -- 나이값은 주민등록번호에서 연산하여 구하기  * 수정불가항목
+RESIDENT_ID INT NOT NULL, -- 주민등록번호  * 수정불가항목
+GENDER VARCHAR(6) NOT NULL, --  * 수정불가항목
 LOCAL VARCHAR(20) NOT NULL, -- 지역
 MOBILE VARCHAR(20) NOT NULL, -- 폰번호
 HOBBY1 VARCHAR(20) NOT NULL, -- 취미*3
@@ -32,13 +32,27 @@ INTRO TEXT -- 자기소개
 );
 
 --------------------------------------------------------
---  DDL for Index MEMBERS_PK
+--  DDL for Table MEM_IMG
+--------------------------------------------------------
+
+CREATE TABLE MEM_IMG
+( UUID VARCHAR(100) NOT NULL,
+PATH VARCHAR(200) NOT NULL,
+NAME VARCHAR(100) NOT NULL,
+EMAIL VARCHAR(30) NOT NULL
+);
+
+--------------------------------------------------------
+--  DDL for Index
 --------------------------------------------------------
 
 CREATE UNIQUE INDEX MEMBERS_PK ON MEMBERS (EMAIL);
+CREATE UNIQUE INDEX MEM_IMG_PK ON MEM_IMG (UUID);
 
 --------------------------------------------------------
---  Constraints for Table MEMBERS
+--  Constraints
 --------------------------------------------------------
 
 ALTER TABLE MEMBERS ADD CONSTRAINT MEMBERS_PK PRIMARY KEY (EMAIL);
+ALTER TABLE MEM_IMG ADD CONSTRAINT MEM_IMG_PK PRIMARY KEY (UUID);
+ALTER TABLE MEM_IMG ADD CONSTRAINT MEM_IMG_FK FOREIGN KEY (EMAIL) REFERENCES MEMBERS (EMAIL);
