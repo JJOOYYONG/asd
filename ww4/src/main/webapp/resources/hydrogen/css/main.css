@@ -1,0 +1,17 @@
+@charset "UTF-8";
+body{
+	background-color:rgba(255, 186, 129, 0.15);
+}
+
+#joinframe{
+	text-align:center;
+}
+#loginframe{
+	text-align:center;
+}
+
+#uptable{margin:auto;}
+
+#location{margin:auto; text-align:center;}
+#upimg{margin:auto; text-align:center;}
+
