@@ -36,7 +36,7 @@
 <body>
 	
 	<jsp:include page="../include/menu.jsp"/>
-	<jsp:include page="../include/header2.jsp" />
+	<jsp:include page="../include/header.jsp" />
 
 
 	
@@ -48,7 +48,7 @@
 		<br><br>
 		
 		
-		<form action="/member/login2" class="form-horizontal" method="post" name="loginfrm">
+		<form action="/member/login" class="form-horizontal" method="post" name="loginfrm">
 		<div class="row">
 						
 			<div class="form-group">
@@ -78,7 +78,7 @@
 
 
 
-	<jsp:include page="../include/footer2.jsp" />
+	<jsp:include page="../include/footer.jsp" />
 
 
 	<!-- jQuery -->

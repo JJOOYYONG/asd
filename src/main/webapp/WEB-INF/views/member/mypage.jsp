@@ -65,7 +65,7 @@
 <body>
 
 	<jsp:include page="../include/menu.jsp" />
-	<jsp:include page="../include/header2.jsp" />
+	<jsp:include page="../include/header.jsp" />
 	<!-- END .header -->
 
 
@@ -207,7 +207,7 @@
 		</div>
 	</div>
 
-	<jsp:include page="../include/footer2.jsp" />
+	<jsp:include page="../include/footer.jsp" />
 
 
 	<!-- jQuery -->

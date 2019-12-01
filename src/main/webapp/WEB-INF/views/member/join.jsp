@@ -40,7 +40,7 @@
 <body>
 	
 	<jsp:include page="../include/menu.jsp"/>
-	<jsp:include page="../include/header2.jsp" />
+	<jsp:include page="../include/header.jsp" />
 
 
 	<div id="joinframe" class="container">
@@ -51,7 +51,7 @@
 		<br><br>
 		
 		
-		<form action="/member/join2" class="form-horizontal" method="post" name="m2frm" enctype="multipart/form-data">
+		<form action="/member/join" class="form-horizontal" method="post" name="m2frm" enctype="multipart/form-data">
 		<div class="row">
 						
 			<div class="form-group"><div class="col-md-6 col-md-offset-3">	
@@ -84,7 +84,7 @@
 
 
 
-	<jsp:include page="../include/footer2.jsp" />
+	<jsp:include page="../include/footer.jsp" />
 
 
 	<!-- jQuery -->

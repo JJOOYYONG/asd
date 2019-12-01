@@ -7,19 +7,19 @@
 	<insert id="insertMember" parameterType="MemberVO">
 		INSERT INTO members (
 			email,passwd,username,reg_date,age,resident_id,
-			gender,local,mobile,hobby1,hobby2,hobby3,intro
+			gender,local,mobile,hobby1,hobby2,hobby3,intro,story,main_uuid
 		)
 		VALUES (
 			#{email},#{passwd},#{username},current_date(),
 			#{age},#{residentId},#{gender},#{local},#{mobile},
-			#{hobby1},#{hobby2},#{hobby3},#{intro}
+			#{hobby1},#{hobby2},#{hobby3},#{intro},#{story},#{mainUuid}
 		)
 	</insert>
 	
 	<update id="updateMember" parameterType="MemberVO">
 		UPDATE members
 		SET passwd=#{passwd}, username=#{username}, local=#{local}, mobile=#{mobile},
-			hobby1=#{hobby1}, hobby2=#{hobby2}, hobby3=#{hobby3}, intro=#{intro} 
+			hobby1=#{hobby1}, hobby2=#{hobby2}, hobby3=#{hobby3}, intro=#{intro}, story=#{story}
 		WHERE email=#{email}
 	</update>
 </mapper>

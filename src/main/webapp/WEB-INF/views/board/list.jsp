@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/resources/css/main.css?v=1" type="text/css" media="all">
 </head>
 <body>
-<jsp:include page="../include/header2.jsp"/>
+<jsp:include page="../include/header.jsp"/>
 
 <div id="container">
 <h1>자유 게시판 입니다.</h1>
@@ -70,7 +70,7 @@
 </div>
 
 
-<jsp:include page="../include/footer2.jsp"/>
+<jsp:include page="../include/footer.jsp"/>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
