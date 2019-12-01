@@ -9,7 +9,7 @@
 	</a>
 
 	<c:choose>
-		<c:when test="${empty id }">
+		<c:when test="${empty email}">
 			<h1 class="fh5co-logo">
 				<a class="navbar-brand" href="/">ASD For You</a>
 			</h1>

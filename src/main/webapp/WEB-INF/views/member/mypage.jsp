@@ -83,23 +83,23 @@
 									class="img-rounded img-responsive">
 							</c:when>
 							<c:otherwise>
-								<img src="/resources/upload/${member.mpic }"
+								<img src="/resources/upload/${member.mpic}"
 									class="img-rounded" width="300" height="400">
 							</c:otherwise>
 						</c:choose>
 					</div>
 
 					<p>
-						<br><strong> ${member.comment} </strong>  
+						<br><strong> ${member.intro} </strong>  
 					</p>
 
-					<p>${member.story }</p>
+					<p>${member.story}</p>
 
 					<div class="fh5co-spacer fh5co-spacer-sm"></div>
 
 					<div id="location">
 					<c:choose>
-						<c:when test="${empty member.location }">
+						<c:when test="${empty member.local}">
 							<img src="/resources/hydrogen/images/img_29_large.jpg"
 								class="img-rounded img-responsive" width="700" height="500">
 							<br><br>
@@ -109,7 +109,7 @@
 							<div id="map" style="width: 700px; height: 500px;"></div>
 							<br><br>
 							<div>
-								<input type="hidden" id="search_name" value="${member.location}" />
+								<input type="hidden" id="search_name" value="${member.local}" />
 								<input type="hidden" id="search_lat" /> 
 								<input type="hidden" id="search_lng" />
 								<input type="button" id="locateMe" class="btn btn-success" value="등록된 위치 보기" onclick="add_search();" />
@@ -126,8 +126,8 @@
 
 					<form action="/member/upmypage" method="post" name="myfrm"
 						enctype="multipart/form-data">
-						<input type="hidden" name="id" value="${member.id}"> <input
-							type="hidden" name="num" value="${member.num}">
+						<input type="hidden" name="email" value="${member.email}">
+						<input type="hidden" name="unum" value="${member.unum}">
 
 						<div class="table-responsive-md">
 							<table id="uptable" class="table">
@@ -136,31 +136,37 @@
 								<tr>
 									<th id="upth" class="text-center">닉네임</th>
 									<td id="uptd"><input class="form-control col-md-8"
-										type="text" name="name" value="${member.name}"></td>
+										type="text" name="username" value="${member.username}"></td>
 								</tr>
 
 								<tr>
-									<th class="text-center">취미</th>
-									<td><input class="form-control" type="text" name="hobby"
-										value="${member.hobby}"></td>
+									<th class="text-center">취미1</th>
+									<td><input class="form-control" type="text" name="hobby1"
+										value="${member.hobby1}"></td>
+								</tr>
+								
+								<tr>
+									<th class="text-center">취미2</th>
+									<td><input class="form-control" type="text" name="hobby2"
+										value="${member.hobby2}"></td>
+								</tr>
+								
+								<tr>
+									<th class="text-center">취미3</th>
+									<td><input class="form-control" type="text" name="hobby3"
+										value="${member.hobby3}"></td>
 								</tr>
 
 								<tr>
-									<th class="text-center">나이</th>
-									<td><input class="form-control" type="number" name="age"
-										value="${member.age}"></td>
+									<th class="text-center">주민등록번호</th>
+									<td><input class="form-control" type="text" name="residentId"
+										value="${member.residentId}"></td>
 								</tr>
 
 								<tr>
-									<th class="text-center">성별</th>
-									<td><input class="form-control" type="text" name="gender"
-										value="${member.gender}"></td>
-								</tr>
-
-								<tr>
-									<th class="text-center">주소</th>
+									<th class="text-center">지역</th>
 									<td><input class="form-control" type="text"
-										name="location" value="${member.location}"></td>
+										name="location" value="${member.local}"></td>
 								</tr>
 
 								<tr>
@@ -171,8 +177,8 @@
 								
 								<tr>
 									<th class="text-center">한마디</th>
-									<td><input class="form-control" type="text" name="comment"
-										value="${member.comment}"></td>
+									<td><input class="form-control" type="text" name="intro"
+										value="${member.intro}"></td>
 								</tr>
 								
 								

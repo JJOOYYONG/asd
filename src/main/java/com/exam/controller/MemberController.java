@@ -3,7 +3,13 @@ package com.exam.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,25 +36,53 @@ import com.exam.service.MemberService;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
-@RequestMapping("/member/*")
+@RequestMapping("member")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
 
-	@GetMapping("/join")
-	public String join() {
-		return "member/join";
-	}
+	@GetMapping("join")
+	public void join() {}
 
-	@PostMapping("/join")
+	@PostMapping("join")
 	public ResponseEntity<String> join(MemberVO memberVO) {
 
 		String email = memberVO.getEmail();
 		
+		// 회원번호 생성
+		// 모든 회원은 10001번 이상의 번호를 부여받고, 10000이하의 번호에게 관리자 권한을 주기
 		int count = memberService.countMemberByClient();
-		count += 10001; // 모든 회원은 10001번 이상의 번호를 부여받고, 10000이하의 번호에게 관리자 권한을 주는건 어떨까?
+		count += 10001;
 		memberVO.setUnum(count);
+		
+		// 주민번호로부터 나이 추출
+		int age = 0;
+		try {
+			String birthYear = memberVO.getResidentId().substring(0, 2);
+			SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+			
+			Date birthday = sdf.parse(birthYear+"-01-01");
+			Calendar calBirth = new GregorianCalendar();
+		    Calendar calToday = new GregorianCalendar();
+
+		    calBirth.setTime(birthday);
+		    calToday.setTime(new Date());
+
+		    age = calToday.get(Calendar.YEAR) - calBirth.get(Calendar.YEAR) + 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			memberVO.setAge(age);
+		}
+		
+		// 주민번호로부터 성별 추출
+		String backNumber = memberVO.getResidentId().split("-")[1];
+		if (backNumber.startsWith("1") || backNumber.startsWith("3")) {
+			memberVO.setGender("남자");
+		} else {
+			memberVO.setGender("여자");
+		}
 		
 		int check = memberService.insertMember(memberVO);
 		
@@ -65,20 +99,17 @@ public class MemberController {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
 		sb.append("alert('" + message + "');");
-		sb.append("location.href='/member/login';");
+		sb.append("location.href='/member/addpic';");
 		sb.append("</script>");
 
 		return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
 
 	}
 
+	@GetMapping("login")
+	public void login() {}
 
-	@GetMapping("/login")
-	public String login() {
-		return "member/login";
-	}
-
-	@PostMapping("/login")
+	@PostMapping("login")
 	public ResponseEntity<String> login(String email, String passwd, HttpSession session) {
 		
 		int check=memberService.userCheck(email, passwd);
@@ -119,7 +150,7 @@ public class MemberController {
 		
 	}
 
-	@GetMapping("/logout")
+	@GetMapping("logout")
 	public ResponseEntity<String> logout(HttpSession session) {
 		session.invalidate();
 		HttpHeaders headers = new HttpHeaders();
@@ -135,26 +166,25 @@ public class MemberController {
 
 	}
 
-	@GetMapping("/joinIdDupCheckJson")
+	@GetMapping("joinIdDupCheckJson")
 	@ResponseBody
 	public boolean joinIdDupCheckJson(String id) {
 		boolean isIdDup = memberService.isIdDuplicated(id);
 		return isIdDup;
 	}
 	
-	@GetMapping("/mypage")
+	@GetMapping("mypage")
 	public String mypage(String email, Model model) {
 		
 		MemberVO memberVO = memberService.getMemberByEmail(email);
-		int unum =memberVO.getUnum();
-		
-		
+		System.out.println(email);
+		System.out.println(memberVO);
 		model.addAttribute("member", memberVO);
 		
 		return "member/mypage";
 	}
 	
-	@PostMapping("/upmypage")
+	@PostMapping("upmypage")
 	public String upmypage(MultipartFile[] files, MemberVO memberVO, HttpServletRequest request) throws Exception{
 		
 		ServletContext application = request.getServletContext();

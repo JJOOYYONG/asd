@@ -22,7 +22,7 @@ PASSWD VARCHAR(20) NOT NULL,
 USERNAME VARCHAR(20) NOT NULL,   -- 닉네임(보여지는 이름)
 REG_DATE DATE NOT NULL,          -- * 수정불가항목
 AGE INT NOT NULL,                -- 나이값은 주민등록번호에서 연산하여 구하기  * 수정불가항목
-RESIDENT_ID INT NOT NULL,        -- 주민등록번호  * 수정불가항목
+RESIDENT_ID VARCHAR(40) NOT NULL,-- 주민등록번호  * 수정불가항목
 GENDER VARCHAR(6) NOT NULL,      --  * 수정불가항목
 LOCAL VARCHAR(20) NOT NULL,      -- 지역
 MOBILE VARCHAR(20) NOT NULL,     -- 폰번호
@@ -31,7 +31,7 @@ HOBBY2 VARCHAR(20) NOT NULL,
 HOBBY3 VARCHAR(20) NOT NULL,
 INTRO VARCHAR(100),              -- 자기소개
 STORY TEXT,                      -- TMI
-MAIN_UUID VARCHAR(100)           -- 메인이미지 선택정보
+MPIC VARCHAR(100)               -- 메인이미지 선택정보
 );
 
 --------------------------------------------------------

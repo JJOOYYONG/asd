@@ -66,8 +66,32 @@
 			</div></div>
 			
 			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" id="name"
-						name="name" placeholder="닉네임">
+				<input type="text" class="form-control" id="username"
+						name="username" placeholder="닉네임">
+			</div></div>
+			
+			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
+				<input type="text" class="form-control" name="residentId" placeholder="주번">
+			</div></div>
+			
+			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
+				<input type="text" class="form-control" name="local" placeholder="지역">
+			</div></div>
+			
+			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
+				<input type="text" class="form-control" name="mobile" placeholder="휴대전화번호">
+			</div></div>
+			
+			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
+				<input type="text" class="form-control" name="hobby1" placeholder="취미1">
+			</div></div>
+			
+			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
+				<input type="text" class="form-control" name="hobby2" placeholder="취미2">
+			</div></div>
+			
+			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
+				<input type="text" class="form-control" name="hobby3" placeholder="취미3">
 			</div></div>
 				
 			<br><br>
