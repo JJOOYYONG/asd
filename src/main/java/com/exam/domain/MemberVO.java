@@ -9,18 +9,21 @@ import lombok.Data;
 @Data
 public class MemberVO {
 	
-	private String email;
-	private String passwd;
-	private String username;
+	private String email; 						// ID겸 이메일
+	private int unum;							// 회원 번호
+	private String passwd;						// 비밀번호
+	private String username;					// 닉네임
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date regDate;
-	private int age;
-	private int residentId;
-	private String gender;
-	private String local;
-	private String mobile;
-	private String hobby1;
-	private String hobby2;
-	private String hobby3;
-	private String intro;
+	private Date regDate;						// 가입날짜
+	private int age;							// 나이(주민등록번호로 연산)
+	private String residentId;					// 주민등록번호
+	private String gender;						// 성별(주민등록번호로 연산)
+	private String local;						// 지역
+	private String mobile;						// 휴대폰번호
+	private String hobby1;						// 취미1
+	private String hobby2;						// 취미2
+	private String hobby3;						// 취미3
+	private String intro;						// 한줄소개
+	private String story;						// TMI소개
+	private String mpic;						// 선택된 메인이미지의 파일이름+확장자
 }
