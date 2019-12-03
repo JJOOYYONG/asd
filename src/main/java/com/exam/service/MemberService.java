@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.exam.domain.MemImgVO;
+import com.exam.domain.AttachVO;
 import com.exam.domain.MemberVO;
-import com.exam.mapper.MemImgMapper;
+import com.exam.mapper.AttachMapper;
 import com.exam.mapper.MemberMapper;
 
 @Service
@@ -16,12 +16,11 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	@Autowired
-	private MemImgMapper memImgMapper;
+	private AttachMapper attachMapper;
 	
 	// 회원정보 삽입
-	public void insertMember(MemberVO memberVO, MemImgVO memImgVO) {
-		memberMapper.insertMember(memberVO);
-		memImgMapper.insertImage(memImgVO);
+	public int insertMember(MemberVO memberVO) {
+		return memberMapper.insertMember(memberVO);
 	}
 	
 	// 회원정보 수정
@@ -51,5 +50,17 @@ public class MemberService {
 			isIdDup = true;
 		}
 		return isIdDup;
+	}
+	
+	public int countMemberAll() {
+		return memberMapper.countMemberAll();
+	}
+	
+	public int countMemberByClient() {
+		return memberMapper.countMemberByClient();
+	}
+	
+	public MemberVO getMemberByEmail(String email) {
+		return memberMapper.getMemberByEmail(email);
 	}
 }
