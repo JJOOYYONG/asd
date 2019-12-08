@@ -29,9 +29,9 @@ MOBILE VARCHAR(20) NOT NULL,     -- 폰번호
 HOBBY1 VARCHAR(20) NOT NULL,     -- 취미*3
 HOBBY2 VARCHAR(20) NOT NULL,
 HOBBY3 VARCHAR(20) NOT NULL,
+RECOMMENDED INT NOT NULL,        -- 추천수
 INTRO VARCHAR(100),              -- 자기소개
-STORY TEXT,                      -- TMI
-MPIC VARCHAR(100)               -- 메인이미지 선택정보
+MPIC VARCHAR(100)                -- 메인이미지 선택정보
 );
 
 --------------------------------------------------------

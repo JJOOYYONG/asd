@@ -1,19 +1,24 @@
 package com.exam.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
 
 import com.exam.domain.AttachVO;
 
 public interface AttachMapper {
+	public void insertAttach(AttachVO attachVO);
 	
-	// 이미지정보 1개 삽입
-	public void insertImage(AttachVO attachVO);
+	// 해당 회원의 프로필이미지들
+	@Select("SELECT * FROM attach WHERE unum = #{unum}")
+	public List<AttachVO> getAttaches(int unum);
 	
-	// 입력된 uuid에 해당하는 튜플 삭제 (선택 삭제용)
-	@Delete("DELETE FROM attachs WHERE uuid = #{uuid}")
-	public void deleteImageByUuid(String uuid);
-	
-	// 입력된 회원번호에 해당하는 튜플들 삭제 (회원 탈퇴용)
-	@Delete("DELETE FROM attachs WHERE unum = #{unum}")
-	public void deleteImageByUnum(int unum);
+	// 해당 회원의 모든 이미지 삭제하는 메소드
+	@Delete("DELETE FROM attach WHERE unum = #{unum}")
+	public void deleteAttachByUnum(int unum);
+		
+	// uuid에 해당하는 이미지 한개 삭제하는 메소드
+	@Delete("DELETE FROM attach WHERE uuid = #{uuid}")
+	public void deleteAttachByUuid(String uuid);
 }
