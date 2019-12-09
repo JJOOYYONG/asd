@@ -93,7 +93,7 @@
 						<br><strong> ${member.intro} </strong>  
 					</p>
 
-					<p>${member.story}</p>
+<%-- 					<p>${member.story}</p> --%>
 
 					<div class="fh5co-spacer fh5co-spacer-sm"></div>
 
@@ -182,11 +182,11 @@
 								</tr>
 								
 								
-								<tr>
-									<th class="text-center">소개</th>
-									<td><textarea class="form-control" name="story"
-											style="resize: none;">${member.story}</textarea></td>
-								</tr>
+<!-- 								<tr> -->
+<!-- 									<th class="text-center">소개</th> -->
+<!-- 									<td><textarea class="form-control" name="story" -->
+<%-- 											style="resize: none;">${member.intro}</textarea></td> --%>
+<!-- 								</tr> -->
 
 								<tr>
 									<th class="text-center">파일</th>
@@ -222,10 +222,8 @@
 	<script src="/resources/hydrogen/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
 	<script src="/resources/hydrogen/js/jquery.waypoints.min.js"></script>
 	<!-- Magnific Popup -->

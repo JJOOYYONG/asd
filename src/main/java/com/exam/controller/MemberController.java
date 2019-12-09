@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.exam.domain.AttachVO;
 import com.exam.domain.MemberVO;
+import com.exam.service.AttachService;
 import com.exam.service.MemberService;
 
 import net.coobird.thumbnailator.Thumbnailator;
@@ -41,6 +42,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private AttachService attachService;
 
 	@GetMapping("join")
 	public void join() {}
@@ -79,9 +82,9 @@ public class MemberController {
 		// 주민번호로부터 성별 추출
 		String backNumber = memberVO.getResidentId().split("-")[1];
 		if (backNumber.startsWith("1") || backNumber.startsWith("3")) {
-			memberVO.setGender("남자");
+			memberVO.setGender("남");
 		} else {
-			memberVO.setGender("여자");
+			memberVO.setGender("여");
 		}
 		
 		int check = memberService.insertMember(memberVO);
@@ -99,7 +102,7 @@ public class MemberController {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
 		sb.append("alert('" + message + "');");
-		sb.append("location.href='/member/addpic';");
+		sb.append("location.href='/member/login';");
 		sb.append("</script>");
 
 		return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
@@ -189,17 +192,17 @@ public class MemberController {
 		
 		ServletContext application = request.getServletContext();
 		String realPath = application.getRealPath("/resources/upload");
-				
+			
 		List<AttachVO> attachList = new ArrayList<AttachVO>();
 		
-//		String mpic="";
-//		MemberVO nofixVO = memberService.getMemberByEmail(memberVO.getEmail());
+		String mpic="";
+		MemberVO nofixVO = memberService.getMemberByEmail(memberVO.getEmail());
 		
 		for(MultipartFile multipartFile : files) {
-//			if(multipartFile.isEmpty()) {
-//				mpic=nofixVO.getMpic();
-//				continue;
-//			}
+			if(multipartFile.isEmpty()) {
+				mpic=nofixVO.getMpic();
+				continue;
+			}
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			UUID uuid = UUID.randomUUID();
@@ -228,9 +231,9 @@ public class MemberController {
 		} // for문
 		
 		
-//		memberVO.setMpic(mpic);
-//		memberService.updateMember(memberVO);
-//		attachService.insertAttaches(attachList);
+		memberVO.setMpic(mpic);
+		memberService.updateMember(memberVO);
+		attachService.insertAttaches(attachList);
 		
 		return "main/main";
 	}
