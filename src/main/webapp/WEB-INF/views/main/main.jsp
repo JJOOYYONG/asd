@@ -190,7 +190,7 @@
 	        			
 	        			<div class="intro">
 	        			<div class="line1">
-	        			${mem.name } &nbsp;
+	        			${mem.username } &nbsp;
 	        			
 	        			<c:if test="${mem.gender eq '남' }">
 	        			<img src="/resources/images/icon/manicon1.png" width="50" height="50">
@@ -200,23 +200,23 @@
 	        			</c:if>
 	        
 	        			<!-- hobby -->
-	        			<c:if test="${mem.hobby eq 'hobby1' }">
+	        			<c:if test="${mem.hobby1 eq 'hobby1' }">
 	        			<img src="/resources/images/hobby/drink.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby eq 'hobby2' }">
+	        			<c:if test="${mem.hobby1 eq 'hobby2' }">
 	        			<img src="/resources/images/hobby/Ham.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby eq 'hobby3' }">
+	        			<c:if test="${mem.hobby1 eq 'hobby3' }">
 	        			<img src="/resources/images/hobby/soccer.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby eq 'hobby4' }">
+	        			<c:if test="${mem.hobby1 eq 'hobby4' }">
 	        			<img src="/resources/images/hobby/study.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby eq 'hobby5' }">
+	        			<c:if test="${mem.hobby1 eq 'hobby5' }">
 	        			<img src="/resources/images/hobby/trip.png" width="30" height="30">
 	        			</c:if>
 	        			        		
