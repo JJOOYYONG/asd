@@ -18,7 +18,7 @@
 	
 	<update id="updateMember" parameterType="MemberVO">
 		UPDATE members
-		SET passwd=#{passwd}, username=#{username}, local=#{local}, mobile=#{mobile},
+		SET username=#{username}, local=#{local}, mobile=#{mobile},
 			hobby1=#{hobby1}, hobby2=#{hobby2}, hobby3=#{hobby3}, intro=#{intro}
 		WHERE email=#{email}
 	</update>
