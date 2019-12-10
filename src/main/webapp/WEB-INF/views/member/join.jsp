@@ -93,6 +93,10 @@
 			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
 				<input type="text" class="form-control" name="hobby3" placeholder="취미3">
 			</div></div>
+			
+			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
+				<input type="text" class="form-control" name="intro" placeholder="한줄 자기소개">
+			</div></div>
 				
 			<br><br>
 		

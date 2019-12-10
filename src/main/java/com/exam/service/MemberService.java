@@ -63,4 +63,8 @@ public class MemberService {
 	public MemberVO getMemberByEmail(String email) {
 		return memberMapper.getMemberByEmail(email);
 	}
+	
+	public MemberVO getMemberByUnum(int unum) {
+		return memberMapper.getMemberByUnum(unum);
+	}
 }
