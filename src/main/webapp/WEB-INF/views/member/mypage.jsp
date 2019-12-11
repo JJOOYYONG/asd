@@ -117,21 +117,9 @@
 								</tr>
 
 								<tr>
-									<th class="text-center">취미1</th>
-									<td><input class="form-control" type="text" name="hobby1"
-										value="${member.hobby1}"></td>
-								</tr>
-								
-								<tr>
-									<th class="text-center">취미2</th>
-									<td><input class="form-control" type="text" name="hobby2"
-										value="${member.hobby2}"></td>
-								</tr>
-								
-								<tr>
-									<th class="text-center">취미3</th>
-									<td><input class="form-control" type="text" name="hobby3"
-										value="${member.hobby3}"></td>
+									<th class="text-center">취미</th>
+									<td><input class="form-control" type="text" name="hobby"
+										value="${member.hobby}"></td>
 								</tr>
 
 								<tr>
@@ -234,6 +222,8 @@
 		return two;
 	}
 	
+	var currentPos = [];
+	
 	function getPositions(oneNear, twoNear) {
 		
 		// 현재 위치값을 가진 지도 표시 함수(최대 2명 추가)
@@ -241,6 +231,8 @@
 		
 			var latitud = position.coords.latitude;
 			var longitude = position.coords.longitude;
+			
+			currentPos = [latitud,longitude];
 			
 			var mapContainer = document.getElementById("map") // 지도를 표시할 DIV
 			var mapOption = {

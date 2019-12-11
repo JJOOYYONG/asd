@@ -25,13 +25,24 @@ AGE INT NOT NULL,                -- 나이값은 주민등록번호에서 연산
 RESIDENT_ID VARCHAR(40) NOT NULL,-- 주민등록번호  * 수정불가항목
 GENDER VARCHAR(6) NOT NULL,      --  * 수정불가항목
 LOCAL VARCHAR(20) NOT NULL,      -- 지역
-MOBILE VARCHAR(20) NOT NULL,     -- 폰번호
-HOBBY1 VARCHAR(20) NOT NULL,     -- 취미*3
-HOBBY2 VARCHAR(20) NOT NULL,
-HOBBY3 VARCHAR(20) NOT NULL,
+MOBILE VARCHAR(20),              -- 폰번호
+HOBBY VARCHAR(20) NOT NULL,
 RECOMMENDED INT NOT NULL,        -- 추천수
 INTRO VARCHAR(100),              -- 자기소개
 MPIC VARCHAR(100)                -- 메인이미지 선택정보
+);
+
+--------------------------------------------------------
+--  DDL for Table ATTACHS
+--------------------------------------------------------
+
+CREATE TABLE ATTACHS
+( UUID VARCHAR(100) NOT NULL,
+FILETYPE VARCHAR(20) NOT NULL,
+PATH VARCHAR(200) NOT NULL,
+NAME VARCHAR(100) NOT NULL,
+ATTACH_DATE DATE NOT NULL,
+UNUM INT NOT NULL
 );
 
 --------------------------------------------------------
