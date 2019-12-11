@@ -1,15 +1,20 @@
 package com.exam.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.exam.domain.AttachVO;
 import com.exam.domain.MemberVO;
+import com.exam.service.AttachService;
 import com.exam.service.MemberService;
 
 @Controller
@@ -17,6 +22,9 @@ public class HomeController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private AttachService attachService;
 	
 	@GetMapping("/")
 	public String home(HttpSession session) { 
@@ -52,5 +60,27 @@ public class HomeController {
 	
 	@GetMapping("/pricing")
 	public String pricing() {return "etc/pricing";}
-
+	
+	@GetMapping("/popup")
+	@ResponseBody
+	public List<Map<String,String>>popup(int unum){
+		List<Map<String,String>> popupMapList = new ArrayList<Map<String,String>>();
+		
+		List<String> filenameList = attachService.getAttachpic(unum);
+		
+		System.out.println(filenameList);
+		
+		for(String filename : filenameList) {
+			Map<String,String>popupMap = new HashMap<String,String>();
+			popupMap.put("src", "/resources/upload/"+filename);
+			
+			popupMapList.add(popupMap);
+		}
+			System.out.println(popupMapList);
+			
+			return popupMapList;
+		}
+	
+	
+	
 }

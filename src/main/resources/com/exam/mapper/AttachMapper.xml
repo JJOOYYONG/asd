@@ -4,5 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exam.mapper.AttachMapper">
+	<insert id ="insertAttach">
+	insert into asd.attach(uuid,filetype,path,name,unum,regdate)
+	values(#{uuid},#{filetype},#{path},#{name},#{unum},current_timestamp)
+	
+	</insert>
 	
 </mapper>
