@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exam.mapper.AdditionalMapper">
+	<insert id="insertAddition" parameterType="AdditionalVO">
+		INSERT INTO additional (
+			unum,mobile,hobby,intro,mpic
+		)
+		VALUES (
+			#{unum},#{mobile},#{hobby},#{intro},#{mpic}
+		)
+	</insert>
+	
+	<update id="updateAddition" parameterType="AdditionalVO">
+		UPDATE additional
+		SET mobile=#{mobile},hobby=#{hobby},intro=#{intro},mpic=#{mpic}
+		WHERE unum=#{unum}
+	</update>
+</mapper>

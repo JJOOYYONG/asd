@@ -1,11 +1,14 @@
 package com.exam.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.exam.domain.AttachVO;
 import com.exam.domain.MemberVO;
+import com.exam.mapper.AdditionalMapper;
 import com.exam.mapper.AttachMapper;
 import com.exam.mapper.MemberMapper;
 
@@ -16,7 +19,7 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	@Autowired
-	private AttachMapper attachMapper;
+	private AdditionalMapper additionalMapper;
 	
 	// 회원정보 삽입
 	public int insertMember(MemberVO memberVO) {
@@ -66,5 +69,17 @@ public class MemberService {
 	
 	public MemberVO getMemberByUnum(int unum) {
 		return memberMapper.getMemberByUnum(unum);
+	}
+	
+	public List<MemberVO> getMemberAll() {
+		return memberMapper.getMemberAll();
+	}
+	
+	public List<MemberVO> getMember
+	
+	public void deleteMember(String email) {
+		MemberVO memberVO = memberMapper.getMemberByEmail(email);
+		additionalMapper.deleteAddition(memberVO.getUnum());
+		memberMapper.deleteMemberByEmail(email);
 	}
 }
