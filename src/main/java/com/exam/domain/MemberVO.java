@@ -14,7 +14,8 @@ public class MemberVO {
 	private String passwd;						// 비밀번호
 	private String username;					// 닉네임
 	private String local;						// 지역
-	private String residentId;					// 주민등록번호 (수정불가)
+	private String residentIdF;					// 주민등록번호 (수정불가)
+	private String residentIdB;					// 주민등록번호 (수정불가)
 	private int age;							// 나이(주민등록번호로 연산)
 	private String gender;						// 성별(주민등록번호로 연산)
 	private int recommended;					// 추천수 (수정불가)

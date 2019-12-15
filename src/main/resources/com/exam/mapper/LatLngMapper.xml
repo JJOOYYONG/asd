@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.mapper.LatLngMapper">
+	<insert id="insertLatLng" parameterType="LatLngVO">
+		INSERT INTO lat_lng (
+			lat,lng,unum
+		)
+		VALUES (
+			#{lat},#{lng},#{unum}
+		)
+	</insert>
+	
+	<update id="updateLatLng" parameterType="LatLngVO">
+		UPDATE lat_lng
+		SET lat=#{lat},lng=#{lng}
+		WHERE unum=#{unum}
+	</update>
+	
+	<update id="removeLatLng" parameterType="LatLngVO">
+		UPDATE lat_lng
+		SET lat=#{0.0},lng=#{0.0}
+		WHERE unum=#{unum}
+	</update>
+</mapper>

@@ -76,103 +76,16 @@
 					<h2>Personal Bio</h2>
 					<div class="fh5co-spacer fh5co-spacer-sm"></div>
 
-					<div id="upimg">
-						<c:choose>
-							<c:when test="${empty member.mpic}">
-								<img src="/resources/hydrogen/images/img_29_large.jpg"
-									class="img-rounded img-responsive">
-							</c:when>
-							<c:otherwise>
-								<img src="/resources/upload/${member.mpic}"
-									class="img-rounded" width="300" height="400">
-							</c:otherwise>
-						</c:choose>
-					</div>
-
-					<p>
-						<br><strong> ${member.intro} </strong>  
-					</p>
-
-<%-- 					<p>${member.story}</p> --%>
-
-					<div class="fh5co-spacer fh5co-spacer-sm"></div>
-
 					<div id="map" style="width: 800px; height: 400px;"></div>
 
 					<div class="fh5co-spacer fh5co-spacer-sm"></div>
-
-					<form action="/member/upmypage" method="post" name="myfrm"
-						enctype="multipart/form-data">
-						<input type="hidden" name="email" value="${member.email}">
-						<input type="hidden" name="unum" value="${member.unum}">
-
-						<div class="table-responsive-md">
-							<table id="uptable" class="table">
-
-
-								<tr>
-									<th id="upth" class="text-center">닉네임</th>
-									<td id="uptd"><input class="form-control col-md-8"
-										type="text" name="username" value="${member.username}"></td>
-								</tr>
-
-								<tr>
-									<th class="text-center">취미</th>
-									<td><input class="form-control" type="text" name="hobby"
-										value="${member.hobby}"></td>
-								</tr>
-
-								<tr>
-									<th class="text-center">주민등록번호</th>
-									<td><input class="form-control" type="text" name="residentId"
-										value="${member.residentId}"></td>
-								</tr>
-
-								<tr>
-									<th class="text-center">지역</th>
-									<td><input class="form-control" type="text"
-										name="local" value="${member.local}"></td>
-								</tr>
-
-								<tr>
-									<th class="text-center">휴대폰 번호</th>
-									<td><input class="form-control" type="text" name="mobile"
-										value="${member.mobile}"></td>
-								</tr>
-								
-								<tr>
-									<th class="text-center">한마디</th>
-									<td><input class="form-control" type="text" name="intro"
-										value="${member.intro}"></td>
-								</tr>
-								
-								
-<!-- 								<tr> -->
-<!-- 									<th class="text-center">소개</th> -->
-<!-- 									<td><textarea class="form-control" name="story" -->
-<%-- 											style="resize: none;">${member.intro}</textarea></td> --%>
-<!-- 								</tr> -->
-
-								<tr>
-									<th class="text-center">파일</th>
-									<td>
-										<div id="file_container">
-											<input class="form-control" type="file" name="files"
-												multiple="multiple">
-										</div>
-									</td>
-								</tr>
-
-
-							</table>
-						</div>
-
-						<br>
-						<br> <input type="submit" value="프로필 수정"
-							class="btn btn-info col-md-offset-4 col-md-4">
-
-					</form>
-
+					
+					<input type="button" value="이미지 업로드" class="btn btn-info col-md-offset-4 col-md-4"
+					onclick="location.href='/member/attach?email=${email}'">
+					<input type="button" value="추가정보 입력/수정" class="btn btn-info col-md-offset-4 col-md-4"
+					onclick="location.href='/member/additional?email=${email}'">
+					<input type="button" value="기본정보 수정" class="btn btn-info col-md-offset-4 col-md-4"
+					onclick="">
 				</div>
 			</div>
 		</div>
@@ -186,7 +99,6 @@
 	<!-- jQuery Easing -->
 	<script src="/resources/hydrogen/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
@@ -200,31 +112,33 @@
 	<!-- kakao JS -->
 	<script type="text/javascript"
 	   src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=4820dee17d15845074a3087a1a27ea0c&libraries=services"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-
 	<script type="text/javascript">
 	
-	document.addEventListener("DOMContentLoaded", getPositions(oneNear(35.163826,129.055451), twoNear(35.156034,129.058726)));
 	
-	// 1번째 유저의 경도위도 위치값을 받아 저장하는 함수
-	function oneNear(oneLat, oneLong) {
-		var one = [];
-		one.push(oneLat);
-		one.push(oneLong);
-		return one;
-	}
 	
-	// 2번째 유저의 경도위도 위치값을 받아 저장하는 함수
-	function twoNear(twoLat, twoLong) {
-		var two = [];
-		two.push(twoLat);
-		two.push(twoLong);
-		return two;
-	}
+// 	document.addEventListener("DOMContentLoaded", getPositions(oneNear(35.163826,129.055451), twoNear(35.156034,129.058726)));
+	document.addEventListener("DOMContentLoaded", getPositions());
 	
-	var currentPos = [];
+// 	// 1번째 유저의 경도위도 위치값을 받아 저장하는 함수
+// 	function oneNear(oneLat, oneLong) {
+// 		var one = [];
+// 		one.push(oneLat);
+// 		one.push(oneLong);
+// 		return one;
+// 	}
 	
-	function getPositions(oneNear, twoNear) {
+// 	// 2번째 유저의 경도위도 위치값을 받아 저장하는 함수
+// 	function twoNear(twoLat, twoLong) {
+// 		var two = [];
+// 		two.push(twoLat);
+// 		two.push(twoLong);
+// 		return two;
+// 	}
+	
+// 	var currentPos = [];
+	
+// 	function getPositions(oneNear, twoNear) {
+	function getPositions() {
 		
 		// 현재 위치값을 가진 지도 표시 함수(최대 2명 추가)
 		function getLocation(position) {
@@ -232,7 +146,20 @@
 			var latitud = position.coords.latitude;
 			var longitude = position.coords.longitude;
 			
-			currentPos = [latitud,longitude];
+			oneNear = [0,0];
+			twoNear = [35.156034,129.058726]
+// 			currentPos = [latitud,longitude];
+			
+			$.ajax({
+				type: "POST",
+				url: "/member/latLng",
+				data: {lat: latitud, lng: longitude},
+				dataType: "json",
+				success: function (data) {
+					oneNear[0] = data[0];
+					oneNear[1] = data[1];
+				}
+			});
 			
 			var mapContainer = document.getElementById("map") // 지도를 표시할 DIV
 			var mapOption = {
@@ -248,7 +175,7 @@
 			// 마커를 표시할 위치와 content 객체 배열입니다 
 			var positions = [
 				{ //여기서 부터 현재 위치 경도,위도 찍힙니당,
-					content : '<div>학원</div>',
+					content : '<div>내 위치</div>',
 					latlng : new kakao.maps.LatLng(latitud, longitude)
 				},
 				{

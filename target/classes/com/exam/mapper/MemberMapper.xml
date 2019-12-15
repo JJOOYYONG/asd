@@ -11,7 +11,7 @@
 		)
 		VALUES (
 			#{email},#{unum},#{passwd},#{username},#{local},
-			#{residentId},#{age},#{gender},0,current_date()
+			CONCAT(#{residentIdF},'-',#{residentIdB}),#{age},#{gender},0,current_date()
 		)
 	</insert>
 	
