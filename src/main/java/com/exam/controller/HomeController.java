@@ -24,32 +24,22 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(HttpSession session) { 
 		List<Map<String,Object>>memAddList = new ArrayList<Map<String,Object>>();
-//		List<MemberVO> memberList = new ArrayList<MemberVO>();
-//		List<AdditionalVO> additionList = new ArrayList<AdditionalVO>();
-//		while (memberList.size()<10) {
-		while (memAddList.size()<400) {
-			int rand = (int)(Math.random()*memberService.countMemberByClient())+1;
-			rand += 10000; // 10001~회원갯수 중 랜덤
-			
-//			if (memberList != null) {
-//				for (MemberVO memberVO : memberList) {
-//					System.out.println(memberVO.getUnum());
-//					while (rand == memberVO.getUnum()) {
-//						rand = (int)(Math.random()*memberService.countMemberByClient())+1;
-//					}
-//				}
-//			}
-			
-			MemberVO vo = memberService.getMemberByUnum(rand);
-			Map<String,Object> map = new HashMap<String, Object>();
-			map.put("member", vo);
-			map.put("addition", memberService.getAddtionByUnum(vo.getUnum()));
-			memAddList.add(map);
-//			memberList.add(vo);
-//			additionList.add(memberService.getAddtionByUnum(vo.getUnum()));
+
+		if (memberService.countMemberAll() > 0) {
+			while (memAddList.size()<20) {
+				int rand = (int)(Math.random()*memberService.countMemberByClient())+1;
+				rand += 10000; // 10001~회원갯수 중 랜덤
+
+				MemberVO vo = memberService.getMemberByUnum(rand);
+				Map<String,Object> map = new HashMap<String, Object>();
+				
+				map.put("member", vo);
+				map.put("addition", memberService.getAddtionByUnum(vo.getUnum()));
+				memAddList.add(map);
+			}
+		} else {
+			memAddList = null;
 		}
-//		session.setAttribute("showMemberList", memberList);
-//		session.setAttribute("additionList", additionList);
 		session.setAttribute("maList", memAddList);
 
 		// 리다이렉트일 경우 HttpStatus.Found 지정해야 함
