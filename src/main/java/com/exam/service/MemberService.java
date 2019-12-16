@@ -141,4 +141,8 @@ public class MemberService {
 	public List<LatLngVO> getLatLngAll() {
 		return latLngMapper.getLatLngAll();
 	}
+	
+	public boolean isAdditionExist(int unum) {
+		return additionalMapper.countAdditionByUnum(unum)!=0;
+	}
 }

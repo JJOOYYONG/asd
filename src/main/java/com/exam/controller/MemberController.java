@@ -229,59 +229,60 @@ public class MemberController {
 	}
 	
 	@PostMapping("attach")
-	public String attach(MultipartFile[] files, String email, HttpServletRequest request) throws Exception{
-		
-		int unum = memberService.getMemberByEmail(email).getUnum();
-		AdditionalVO additionalVO = memberService.getAddtionByUnum(unum);
-		
-		ServletContext application = request.getServletContext();
-		String realPath = application.getRealPath("/resources/upload");
-		
-		List<AttachVO> attachList = new ArrayList<AttachVO>();
-		
-		String mpic="";
-//		MemberVO oldVO = memberService.getMemberByEmail(memberVO.getEmail());
-//		AdditionalVO oldAddVO = memberService.getAddtionByUnum(additionalVO.getUnum());
-		
-		for(MultipartFile multipartFile : files) {
-			if(multipartFile.isEmpty()) {
-				mpic=additionalVO.getMpic();
-				continue;
-			}
-			
-			String uploadFileName = multipartFile.getOriginalFilename();
-			UUID uuid = UUID.randomUUID();
-			File saveFile = new File(realPath, uploadFileName);
-		
-			multipartFile.transferTo(saveFile);
-			
-			AttachVO attachVO = new AttachVO();
-			attachVO.setUnum(unum);
-			attachVO.setUuid(uuid.toString());
-			attachVO.setPath(realPath);
-			attachVO.setName(multipartFile.getOriginalFilename());
-			
-			mpic=multipartFile.getOriginalFilename();
-			
-			if(isImageType(saveFile)) {
-				File thumnailFile = new File(realPath, "s_"+uploadFileName);
-				try(FileOutputStream fos = new FileOutputStream(thumnailFile)){
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), fos, 100, 100);
-				}
-				attachVO.setFiletype("I");
-			} else {
-				attachVO.setFiletype("O");
-			}
-			attachList.add(attachVO);
-		} // for문
-		
-		
-		additionalVO.setMpic(mpic);
-		memberService.updateAddition(additionalVO);
-		attachService.insertAttaches(attachList);
-		
-		return "main/main";
-	}
+	   public String attach(MultipartFile[] files, String email, HttpServletRequest request) throws Exception{
+	      
+	      int unum = memberService.getMemberByEmail(email).getUnum();
+	      
+	      AdditionalVO additionalVO = new AdditionalVO();
+	      
+	      ServletContext application = request.getServletContext();
+	      String realPath = application.getRealPath("/resources/upload");
+	      
+	      List<AttachVO> attachList = new ArrayList<AttachVO>();
+	      
+	      String mpic="";
+	      
+	      for(MultipartFile multipartFile : files) {
+	         
+	         String uploadFileName = multipartFile.getOriginalFilename();
+	         UUID uuid = UUID.randomUUID();
+	         File saveFile = new File(realPath, uploadFileName);
+	      
+	         multipartFile.transferTo(saveFile);
+	         
+	         AttachVO attachVO = new AttachVO();
+	         attachVO.setUnum(unum);
+	         attachVO.setUuid(uuid.toString());
+	         attachVO.setPath(realPath);
+	         attachVO.setName(multipartFile.getOriginalFilename());
+	         
+	         mpic=multipartFile.getOriginalFilename();
+	         
+	         if(isImageType(saveFile)) {
+	            File thumnailFile = new File(realPath, "s_"+uploadFileName);
+	            try(FileOutputStream fos = new FileOutputStream(thumnailFile)){
+	               Thumbnailator.createThumbnail(multipartFile.getInputStream(), fos, 100, 100);
+	            }
+	            attachVO.setFiletype("I");
+	         } else {
+	            attachVO.setFiletype("O");
+	         }
+	         attachList.add(attachVO);
+	      } // for문
+	      
+	      additionalVO.setMpic(mpic);
+	      additionalVO.setUnum(unum);
+	      
+	      if (memberService.isAdditionExist(unum)) {
+	         memberService.updateAddition(additionalVO);
+	      } else {
+	         memberService.insertAddition(additionalVO);
+	      }
+	      
+	      attachService.insertAttaches(attachList);
+	      
+	      return "member/mypage";
+	   }
 	
 	@PostMapping("latLng")
 	@ResponseBody
@@ -317,6 +318,8 @@ public class MemberController {
 		
 		return isImageType;
 	}
+	
+	
 	
 	
 

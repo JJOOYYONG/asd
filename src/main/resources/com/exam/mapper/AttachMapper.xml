@@ -13,4 +13,6 @@
 			current_date(),#{unum}
 		)
 	</insert>
+	
+
 </mapper>
