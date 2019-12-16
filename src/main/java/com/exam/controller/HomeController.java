@@ -12,7 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.exam.domain.AttachVO;
+<<<<<<< HEAD
+
+=======
+import com.exam.domain.AdditionalVO;
+>>>>>>> upstream/master
 import com.exam.domain.MemberVO;
 import com.exam.service.AttachService;
 import com.exam.service.MemberService;
@@ -28,9 +32,11 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(HttpSession session) { 
-		List<MemberVO> memberList = new ArrayList<MemberVO>();
-		
-		while (memberList.size()<20) {
+		List<Map<String,Object>>memAddList = new ArrayList<Map<String,Object>>();
+//		List<MemberVO> memberList = new ArrayList<MemberVO>();
+//		List<AdditionalVO> additionList = new ArrayList<AdditionalVO>();
+//		while (memberList.size()<10) {
+		while (memAddList.size()<400) {
 			int rand = (int)(Math.random()*memberService.countMemberByClient())+1;
 			rand += 10000; // 10001~회원갯수 중 랜덤
 			
@@ -44,9 +50,16 @@ public class HomeController {
 //			}
 			
 			MemberVO vo = memberService.getMemberByUnum(rand);
-			memberList.add(vo);
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("member", vo);
+			map.put("addition", memberService.getAddtionByUnum(vo.getUnum()));
+			memAddList.add(map);
+//			memberList.add(vo);
+//			additionList.add(memberService.getAddtionByUnum(vo.getUnum()));
 		}
-		session.setAttribute("showMemberList", memberList);
+//		session.setAttribute("showMemberList", memberList);
+//		session.setAttribute("additionList", additionList);
+		session.setAttribute("maList", memAddList);
 
 		// 리다이렉트일 경우 HttpStatus.Found 지정해야 함
 		return "main/main";

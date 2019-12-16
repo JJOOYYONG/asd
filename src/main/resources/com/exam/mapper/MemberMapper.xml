@@ -6,20 +6,21 @@
 <mapper namespace="com.exam.mapper.MemberMapper">
 	<insert id="insertMember" parameterType="MemberVO">
 		INSERT INTO members (
-			email,unum,passwd,username,reg_date,age,resident_id,
-			gender,local,mobile,hobby1,hobby2,hobby3,intro,mpic,recommended
+			email,unum,passwd,username,local,
+			resident_id,age,gender,recommended,reg_date
 		)
 		VALUES (
-			#{email},#{unum},#{passwd},#{username},current_date(),
-			#{age},#{residentId},#{gender},#{local},#{mobile},
-			#{hobby1},#{hobby2},#{hobby3},#{intro},#{mpic},0
+			#{email},#{unum},#{passwd},#{username},#{local},
+			CONCAT(#{residentIdF},'-',#{residentIdB}),#{age},#{gender},0,current_date()
 		)
 	</insert>
 	
 	<update id="updateMember" parameterType="MemberVO">
 		UPDATE members
-		SET username= #{username}, local=#{local}, mobile=#{mobile},
-			hobby1=#{hobby1}, hobby2=#{hobby2}, hobby3=#{hobby3}, intro=#{intro}, mpic=#{mpic}
+<<<<<<< HEAD
+=======
+		SET passwd=#{passwd}, username=#{username}, local=#{local}
+>>>>>>> upstream/master
 		WHERE email=#{email}
 	</update>
 </mapper>

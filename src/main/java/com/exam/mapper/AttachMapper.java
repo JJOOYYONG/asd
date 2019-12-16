@@ -10,8 +10,11 @@ import com.exam.domain.AttachVO;
 public interface AttachMapper {
 	public void insertAttach(AttachVO attachVO);
 	
-	// 해당 회원의 프로필이미지 전체
-	@Select("SELECT * FROM attachs WHERE unum = #{unum}")
+<<<<<<< HEAD
+=======
+	// 해당 회원의 프로필이미지들
+	@Select("SELECT * FROM attach WHERE unum = #{unum} ORDER BY attach_data DESC")
+>>>>>>> upstream/master
 	public List<AttachVO> getAttaches(int unum);
 	
 	//해당 회원들의 이미지 이름들 가져오기
