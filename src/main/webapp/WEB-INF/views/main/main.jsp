@@ -164,68 +164,68 @@
 	<div class="row">
     <div id="fh5co-board" data-columns>
 		
-		<c:if test="${not empty showMemberList }">
+		<c:if test="${not empty maList}">
 					
-		<c:forEach var="mem" items="${showMemberList}">
+		<c:forEach var="ma" items="${maList}">
 		
 			<div class="item">
 				<div class="animate-box">
 	        		
 	        		<c:choose>
-	        		<c:when test="${empty mem.mpic }">
+	        		<c:when test="${empty ma['addition'].mpic }">
 	        			<a href="/resources/hydrogen/images/img_1.jpg" class="image-popup fh5co-board-img" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, eos?">
 	        			<img src="/resources/hydrogen/images/img_1.jpg" alt="회원사진이 등록 되지 않았습니다."></a>
 	        		</c:when>
 	        		<c:otherwise>
-	        			<a href="/member/memberInfo?num=${mem.unum }" >
-	        			<img src="/resources/upload/${mem.mpic }" alt="회원 이미지"></a>
+	        			<a href="/member/memberInfo?num=${ma['member'].unum }" >
+	        			<img src="/resources/upload/${ma['addition'].mpic }" alt="회원 이미지"></a>
 	        		</c:otherwise>
 	        		</c:choose>
 	        		
 	        		<c:choose>
-	        		<c:when test="${empty mem.intro }">
+	        		<c:when test="${empty ma['addition'].intro }">
 	        			<div class="fh5co-desc">자기소개가 아직 작성되지 않았습니다.</div>
 	        		</c:when>
 	        		<c:otherwise>
 	        			
 	        			<div class="intro">
 	        			<div class="line1">
-	        			${mem.username } &nbsp;
+	        			${ma['member'].username} &nbsp;
 	        			
-	        			<c:if test="${mem.gender eq '남' }">
+	        			<c:if test="${ma['member'].gender eq '남' }">
 	        			<img src="/resources/images/icon/manicon1.png" width="50" height="50">
 	        			</c:if>
-	        			<c:if test="${mem.gender eq '여' }">
+	        			<c:if test="${ma['member'].gender eq '여' }">
 	        			<img src="/resources/images/icon/womanicon1.png" width="50" height="50">
 	        			</c:if>
 	        
 	        			<!-- hobby -->
-	        			<c:if test="${mem.hobby1 eq 'hobby1' }">
+	        			<c:if test="${ma['addition'].hobby eq '술' }">
 	        			<img src="/resources/images/hobby/drink.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby1 eq 'hobby2' }">
+	        			<c:if test="${ma['addition'].hobby eq '음식' }">
 	        			<img src="/resources/images/hobby/Ham.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby1 eq 'hobby3' }">
+	        			<c:if test="${ma['addition'].hobby eq '운동' }">
 	        			<img src="/resources/images/hobby/soccer.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby1 eq 'hobby4' }">
+	        			<c:if test="${ma['addition'].hobby eq '공부' }">
 	        			<img src="/resources/images/hobby/study.png" width="30" height="30">
 	        			</c:if>
 	        			
-	        			<c:if test="${mem.hobby1 eq 'hobby5' }">
+	        			<c:if test="${ma['addition'].hobby eq '여행' }">
 	        			<img src="/resources/images/hobby/trip.png" width="30" height="30">
 	        			</c:if>
 	        			        		
-	        			&nbsp; ${mem.age } 세  
+	        			&nbsp; ${ma['member'].age } 세  
 	        			
 	        			</div>    			     		
 	        		
 	        			<div class="line2">
-	        				<span class="comment">${mem.intro }</span>
+	        				<span class="comment">${ma['addition'].intro }</span>
 	        			</div>
 	        		       	
 	        		

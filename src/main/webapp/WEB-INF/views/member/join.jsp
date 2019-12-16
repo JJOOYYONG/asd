@@ -58,7 +58,6 @@
 				<input type="email" class="form-control " id="email" name="email"
 						placeholder="이메일 주소">
 			</div></div>
-				
 			
 			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
 				<input type="password" class="form-control " id="password"
@@ -70,35 +69,28 @@
 						name="username" placeholder="닉네임">
 			</div></div>
 			
-			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" name="residentId" placeholder="주번">
-			</div></div>
+			<div class="form-group">
+			<span class="col-md-3 col-md-offset-3">		
+				<input type="text" class="form-control" name="residentIdF" placeholder="주번앞">
+			</span>
+			<span class="col-md-3 col-md-offset-0">		
+				<input type="text" class="form-control" name="residentIdB" placeholder="주번뒤">
+			</span>
+			</div>
 			
-			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" name="local" placeholder="지역">
-			</div></div>
-			
-			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" name="mobile" placeholder="휴대전화번호">
-			</div></div>
-			
-			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" name="hobby1" placeholder="취미1">
-			</div></div>
-			
-			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" name="hobby2" placeholder="취미2">
-			</div></div>
-			
-			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" name="hobby3" placeholder="취미3">
-			</div></div>
-			
-			<div class="form-group"><div class="col-md-6 col-md-offset-3">		
-				<input type="text" class="form-control" name="intro" placeholder="한줄 자기소개">
-			</div></div>
+			<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<select class="form-control" name="local" id="local">
+					<option value="" disabled selected>지역</option>
+					<option value="서울">서울</option>
+					<option value="대전">대전</option>
+					<option value="대구">대구</option>
+					<option value="부산">부산</option>
+				</select>
+			</div>
+			</div>
 				
-			<br><br>
+			<br>
 		
 				<input type="submit" class="btn btn-success col-md-6 col-md-offset-3" value="가입">
 				<button type="button" class="btn btn-info col-md-6 col-md-offset-3">취소</button>	

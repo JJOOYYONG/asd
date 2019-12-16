@@ -20,8 +20,8 @@ public class AttachService {
 		attachMapper.insertAttach(attachVO);
 	}
 	
-	public List<AttachVO> getAttaches(int bno){
-		return attachMapper.getAttaches(bno);
+	public List<AttachVO> getAttaches(int unum){
+		return attachMapper.getAttaches(unum);
 	}
 	
 	public void insertAttaches(List<AttachVO> attachList) {

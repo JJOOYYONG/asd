@@ -1,12 +1,21 @@
 package com.exam.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exam.domain.AdditionalVO;
 import com.exam.domain.AttachVO;
+import com.exam.domain.LatLngVO;
 import com.exam.domain.MemberVO;
+import com.exam.mapper.AdditionalMapper;
 import com.exam.mapper.AttachMapper;
+import com.exam.mapper.LatLngMapper;
 import com.exam.mapper.MemberMapper;
 
 @Service
@@ -16,7 +25,9 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	@Autowired
-	private AttachMapper attachMapper;
+	private AdditionalMapper additionalMapper;
+	@Autowired
+	private LatLngMapper latLngMapper; 
 	
 	// 회원정보 삽입
 	public int insertMember(MemberVO memberVO) {
@@ -66,5 +77,68 @@ public class MemberService {
 	
 	public MemberVO getMemberByUnum(int unum) {
 		return memberMapper.getMemberByUnum(unum);
+	}
+	
+	public List<MemberVO> getMemberList() {
+		return memberMapper.getMemberAll();
+	}
+
+	public void deleteMember(String email) {
+		MemberVO memberVO = memberMapper.getMemberByEmail(email);
+		additionalMapper.deleteAddition(memberVO.getUnum());
+		memberMapper.deleteMemberByEmail(email);
+	}
+	
+	public List<Map<String, Object>> getMemberAddtionList() {
+		List<Map<String, Object>> mapList = new ArrayList<>();
+		List<MemberVO> memberList = memberMapper.getMemberAll();
+		for (MemberVO m : memberList) {
+			Map<String, Object> map = new HashMap<>();
+			AdditionalVO a = additionalMapper.getAddition(m.getUnum());
+			map.put("member", m);
+			map.put("addition", a);
+			mapList.add(map);
+		}
+		return mapList;
+	}
+	
+	public boolean isAdded(int unum) {
+		return 1 == additionalMapper.countAdditionByUnum(unum);
+	}
+	
+	public AdditionalVO getAddtionByUnum(int unum) {
+		return additionalMapper.getAddition(unum);
+	}
+	
+	public int insertAddition(AdditionalVO additionalVO) {
+		return additionalMapper.insertAddition(additionalVO);
+	}
+	
+	public int updateAddition(AdditionalVO additionalVO) {
+		return additionalMapper.updateAddition(additionalVO);
+	}
+	
+	public void deleteAddition(int unum) {
+		additionalMapper.deleteAddition(unum);
+	}
+	
+	public int insertLatLng(LatLngVO latLngVO) {
+		return latLngMapper.insertLatLng(latLngVO);
+	}
+	
+	public int updateLatLng(LatLngVO latLngVO) {
+		return latLngMapper.updateLatLng(latLngVO);
+	}
+	
+	public int removeLatLng() {
+		return latLngMapper.removeLatLng();
+	}
+	
+	public boolean isLatLngExist(int unum) {
+		return 1 == latLngMapper.countLatLngByUnum(unum);
+	}
+	
+	public List<LatLngVO> getLatLngAll() {
+		return latLngMapper.getLatLngAll();
 	}
 }
