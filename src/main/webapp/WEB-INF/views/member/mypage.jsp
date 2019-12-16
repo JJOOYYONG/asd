@@ -83,43 +83,19 @@
 									class="img-rounded img-responsive">
 							</c:when>
 							<c:otherwise>
-								<img src="/resources/upload/${member.mpic}"
-									class="img-rounded" width="300" height="400">
+								<img src="/resources/upload/${member.mpic}" class="img-rounded"
+									width="300" height="400">
 							</c:otherwise>
 						</c:choose>
 					</div>
 
 					<p>
-						<br><strong> ${member.intro} </strong>  
+						<br>
+						<strong> ${member.intro} </strong>
 					</p>
 
-<%-- 					<p>${member.story}</p> --%>
+					<%-- 					<p>${member.intro}</p> --%>
 
-					<div class="fh5co-spacer fh5co-spacer-sm"></div>
-
-					<div id="location">
-					<c:choose>
-						<c:when test="${empty member.local}">
-							<img src="/resources/hydrogen/images/img_29_large.jpg"
-								class="img-rounded img-responsive" width="700" height="500">
-							<br><br>
-							<p>위치정보를 등록하지 않았습니다.</p>
-						</c:when>
-						<c:otherwise>
-							<div id="map" style="width: 700px; height: 500px;"></div>
-							<br><br>
-							<div>
-								<input type="hidden" id="search_name" value="${member.local}" />
-								<input type="hidden" id="search_lat" /> 
-								<input type="hidden" id="search_lng" />
-								<input type="button" id="locateMe" class="btn btn-success" value="등록된 위치 보기" onclick="add_search();" />
-								
-								
-							</div>
-						</c:otherwise>
-
-					</c:choose>
-					</div>
 
 
 					<div class="fh5co-spacer fh5co-spacer-sm"></div>
@@ -144,13 +120,13 @@
 									<td><input class="form-control" type="text" name="hobby1"
 										value="${member.hobby1}"></td>
 								</tr>
-								
+
 								<tr>
 									<th class="text-center">취미2</th>
 									<td><input class="form-control" type="text" name="hobby2"
 										value="${member.hobby2}"></td>
 								</tr>
-								
+
 								<tr>
 									<th class="text-center">취미3</th>
 									<td><input class="form-control" type="text" name="hobby3"
@@ -159,14 +135,14 @@
 
 								<tr>
 									<th class="text-center">주민등록번호</th>
-									<td><input class="form-control" type="text" name="residentId"
-										value="${member.residentId}"></td>
+									<td><input class="form-control" type="text"
+										name="residentId" value="${member.residentId}"></td>
 								</tr>
 
 								<tr>
 									<th class="text-center">지역</th>
-									<td><input class="form-control" type="text"
-										name="location" value="${member.local}"></td>
+									<td><input class="form-control" type="text" name="local"
+										value="${member.local}"></td>
 								</tr>
 
 								<tr>
@@ -174,19 +150,19 @@
 									<td><input class="form-control" type="text" name="mobile"
 										value="${member.mobile}"></td>
 								</tr>
-								
+
 								<tr>
 									<th class="text-center">한마디</th>
 									<td><input class="form-control" type="text" name="intro"
 										value="${member.intro}"></td>
 								</tr>
-								
-								
-<!-- 								<tr> -->
-<!-- 									<th class="text-center">소개</th> -->
-<!-- 									<td><textarea class="form-control" name="story" -->
-<%-- 											style="resize: none;">${member.intro}</textarea></td> --%>
-<!-- 								</tr> -->
+
+
+								<!-- 								<tr> -->
+								<!-- 									<th class="text-center">소개</th> -->
+								<!-- 									<td><textarea class="form-control" name="story" -->
+								<%-- 											style="resize: none;">${member.intro}</textarea></td> --%>
+								<!-- 								</tr> -->
 
 								<tr>
 									<th class="text-center">파일</th>
@@ -202,8 +178,7 @@
 							</table>
 						</div>
 
-						<br>
-						<br> <input type="submit" value="프로필 수정"
+						<br> <br> <input type="submit" value="프로필 수정"
 							class="btn btn-info col-md-offset-4 col-md-4">
 
 					</form>
@@ -222,8 +197,10 @@
 	<script src="/resources/hydrogen/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
 	<script src="/resources/hydrogen/js/jquery.waypoints.min.js"></script>
 	<!-- Magnific Popup -->
@@ -232,62 +209,7 @@
 	<script src="/resources/hydrogen/js/salvattore.min.js"></script>
 	<!-- Main JS -->
 	<script src="/resources/hydrogen/js/main.js"></script>
-	<!-- kakao JS -->
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=033ffb3b0837db7593fd93de1e5f8fb2&libraries=services"></script>
-
-	<script>
-		
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨 
-		};
-
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-		//주소-좌표 변환 객체 생성
-		var geocoder = new kakao.maps.services.Geocoder();
-
-		//주소를 좌표를 검색합니다.
-		function add_search() {
-			var add_search = document.getElementById('search_name').value;
-			
-			geocoder.addressSearch(
-				add_search,
-				function(result, status) {
-
-					//정상적으로 검색이 완료됐으면
-					if (status == kakao.maps.services.Status.OK) {
-						var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-						//결과값으로 받은 위치를 마커로 표시합니다.
-						var marker = new kakao.maps.Marker({map : map, position : coords});
-						document.getElementById('search_lat').value = result[0].y;
-						document.getElementById('search_lng').value = result[0].x;
-
-						//인포윈도우로 장소에 대한 설명을 표시합니다.
-						var infowindow = new kakao.maps.InfoWindow({
-							content : '<div style="width:150px;text-align:center;padding:6px0;">${member.name}</div>'
-						});
-
-						infowindow.open(map, marker);
-
-						//지도의 중심으로 결과으로 받은 위치로 이동시킵니다.
-						map.setCenter(coords);
-					} // if문  종료(정상검색)
-				}); // geocoder.search 종료
-		} // add_search 종료
-		
-	</script>
-	<script>
-	$(document).ready(function(){
-			$("#locateMe").bind("click",function(){
-				add_search();
-			})
-			$("#locateMe").trigger("click");
-	})
-	</script>
+	
+	
 </body>
 </html>

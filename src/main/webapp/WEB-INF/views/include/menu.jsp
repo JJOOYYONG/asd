@@ -17,9 +17,9 @@
 				<li class="active"><a href="/">Home</a></li>
 				<li><a href="/member/join">Join</a></li>
 				<li><a href="/member/login">Login</a></li>
-				<li><a href="/about">About </a></li>
-				<li><a href="/pricing">Pricing </a></li>
-				<li><a href="/contact">Contact </a></li>
+<!-- 				<li><a href="/about">About </a></li> -->
+<!-- 				<li><a href="/pricing">Pricing </a></li> -->
+<!-- 				<li><a href="/contact">Contact </a></li> -->
 			</ul>
 
 		</c:when>
@@ -30,8 +30,8 @@
 			<ul>
 				<li class="active"><a href="/">Home</a></li>
 				<li><a href="/member/mypage?email=${email}">My Page</a></li>
+				<li><a href="/member/mappage">근처이성찾기</a></li>
 				<li><a href="/member/logout">Logout</a></li>
-				<li><a href="/main2">Test Page</a></li>
 			</ul>
 
 		</c:otherwise>
