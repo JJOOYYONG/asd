@@ -12,11 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-<<<<<<< HEAD
 
-=======
 import com.exam.domain.AdditionalVO;
->>>>>>> upstream/master
 import com.exam.domain.MemberVO;
 import com.exam.service.AttachService;
 import com.exam.service.MemberService;
@@ -54,15 +51,6 @@ public class HomeController {
 		// 리다이렉트일 경우 HttpStatus.Found 지정해야 함
 		return "main/main";
 	}
-	
-	@GetMapping("/about")
-	public String about() {return "etc/about";}
-	
-	@GetMapping("/contact")
-	public String contact() {return "etc/contact";}
-	
-	@GetMapping("/pricing")
-	public String pricing() {return "etc/pricing";}
 	
 	@GetMapping("/popup")
 	@ResponseBody

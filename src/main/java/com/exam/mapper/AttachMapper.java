@@ -10,15 +10,13 @@ import com.exam.domain.AttachVO;
 public interface AttachMapper {
 	public void insertAttach(AttachVO attachVO);
 	
-<<<<<<< HEAD
-=======
+
 	// 해당 회원의 프로필이미지들
-	@Select("SELECT * FROM attach WHERE unum = #{unum} ORDER BY attach_data DESC")
->>>>>>> upstream/master
+	@Select("SELECT * FROM attachs WHERE unum = #{unum} ORDER BY attach_date DESC")
 	public List<AttachVO> getAttaches(int unum);
 	
 	//해당 회원들의 이미지 이름들 가져오기
-	@Select("SELECT name FROM attachs where unum= #{unum} ORDER BY regdate DESC" )
+	@Select("SELECT name FROM attachs where unum= #{unum} ORDER BY attach_date DESC" )
 	public List<String> getAttachpic(int unum);
 	
 	// 해당 회원의 모든 이미지 삭제하는 메소드

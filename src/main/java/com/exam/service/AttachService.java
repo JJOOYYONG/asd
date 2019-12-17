@@ -22,9 +22,10 @@ public class AttachService {
 	
 	public List<AttachVO> getAttaches(int unum){
 		return attachMapper.getAttaches(unum);
-<<<<<<< HEAD
-=======
->>>>>>> upstream/master
+	}
+	
+	public List<String> getAttachpic(int unum){
+		return attachMapper.getAttachpic(unum);
 	}
 	
 	public void insertAttaches(List<AttachVO> attachList) {
