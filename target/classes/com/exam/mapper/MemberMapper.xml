@@ -17,10 +17,7 @@
 	
 	<update id="updateMember" parameterType="MemberVO">
 		UPDATE members
-<<<<<<< HEAD
-=======
 		SET passwd=#{passwd}, username=#{username}, local=#{local}
->>>>>>> upstream/master
 		WHERE email=#{email}
 	</update>
 </mapper>
