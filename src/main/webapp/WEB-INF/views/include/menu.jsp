@@ -30,7 +30,6 @@
 			<ul>
 				<li class="active"><a href="/">Home</a></li>
 				<li><a href="/member/mypage?email=${email}">My Page</a></li>
-				<li><a href="/member/mappage">근처이성찾기</a></li>
 				<li><a href="/member/logout">Logout</a></li>
 			</ul>
 

@@ -11,11 +11,11 @@ public interface AttachMapper {
 	public void insertAttach(AttachVO attachVO);
 	
 
-	// 해당 회원의 프로필이미지들
+	// 해당 회원의 모든 정보 들고옴
 	@Select("SELECT * FROM attachs WHERE unum = #{unum} ORDER BY attach_date DESC")
 	public List<AttachVO> getAttaches(int unum);
 	
-	//해당 회원들의 이미지 이름들 가져오기
+	//해당 회원들의 이미지들만 들고옴(최신사진기준)
 	@Select("SELECT name FROM attachs where unum= #{unum} ORDER BY attach_date DESC" )
 	public List<String> getAttachpic(int unum);
 	
