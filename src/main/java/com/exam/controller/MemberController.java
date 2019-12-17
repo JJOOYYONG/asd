@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.exam.domain.AdditionalVO;
@@ -232,7 +234,8 @@ public class MemberController {
 	public String attach(MultipartFile[] files, String email, HttpServletRequest request) throws Exception{
 		
 		int unum = memberService.getMemberByEmail(email).getUnum();
-		AdditionalVO additionalVO = memberService.getAddtionByUnum(unum);
+		
+		AdditionalVO additionalVO = new AdditionalVO();
 		
 		ServletContext application = request.getServletContext();
 		String realPath = application.getRealPath("/resources/upload");
@@ -240,14 +243,8 @@ public class MemberController {
 		List<AttachVO> attachList = new ArrayList<AttachVO>();
 		
 		String mpic="";
-//		MemberVO oldVO = memberService.getMemberByEmail(memberVO.getEmail());
-//		AdditionalVO oldAddVO = memberService.getAddtionByUnum(additionalVO.getUnum());
 		
 		for(MultipartFile multipartFile : files) {
-			if(multipartFile.isEmpty()) {
-				mpic=additionalVO.getMpic();
-				continue;
-			}
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			UUID uuid = UUID.randomUUID();
@@ -275,17 +272,23 @@ public class MemberController {
 			attachList.add(attachVO);
 		} // for문
 		
-		
 		additionalVO.setMpic(mpic);
-		memberService.updateAddition(additionalVO);
+		additionalVO.setUnum(unum);
+		
+		if (memberService.isAdditionExist(unum)) {
+			memberService.updateAddition(additionalVO);
+		} else {
+			memberService.insertAddition(additionalVO);
+		}
+		
 		attachService.insertAttaches(attachList);
 		
-		return "main/main";
+		return "member/mypage";
 	}
 	
-	@PostMapping("latLng")
+	@PostMapping(value = "latLng", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	@ResponseBody
-	public List<LatLngVO> latLng(
+	public ResponseEntity<String> latLng(
 			@RequestParam("lat")double lat,
 			@RequestParam("lng")double lng,
 			String email) {
@@ -294,13 +297,22 @@ public class MemberController {
 		latLngVO.setLat(lat);
 		latLngVO.setLng(lng);
 		latLngVO.setUnum(unum);
+		
+		int count = 0;
 		if (memberService.isLatLngExist(unum)) {
-			memberService.updateLatLng(latLngVO);
+			count = memberService.updateLatLng(latLngVO);
 		} else {
-			memberService.insertLatLng(latLngVO);
+			count = memberService.insertLatLng(latLngVO);
 		}
 		
-		return memberService.getLatLngAll();
+		ResponseEntity<String> entity = null;
+		if (count > 0) {
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return entity;
 	}
 	
 	
@@ -317,7 +329,5 @@ public class MemberController {
 		
 		return isImageType;
 	}
-	
-	
 
 }
