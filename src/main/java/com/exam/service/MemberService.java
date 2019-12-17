@@ -121,6 +121,10 @@ public class MemberService {
 	public void deleteAddition(int unum) {
 		additionalMapper.deleteAddition(unum);
 	}
+
+	public boolean isAdditionExist(int unum) {
+		return additionalMapper.countAdditionByUnum(unum)!=0;
+	}
 	
 	public int insertLatLng(LatLngVO latLngVO) {
 		return latLngMapper.insertLatLng(latLngVO);
@@ -141,4 +145,5 @@ public class MemberService {
 	public List<LatLngVO> getLatLngAll() {
 		return latLngMapper.getLatLngAll();
 	}
+	
 }
