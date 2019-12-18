@@ -36,7 +36,7 @@ public class MemberService {
 	
 	// 회원정보 수정
 	public void updateMember(MemberVO memberVO) {
-		memberMapper.updateMember(memberVO);
+		 memberMapper.updateMember(memberVO);
 	}
 	
 	// 성공 : 1, 실패 : 0, 아이디없음 : -1
@@ -113,6 +113,7 @@ public class MemberService {
 	public int insertAddition(AdditionalVO additionalVO) {
 		return additionalMapper.insertAddition(additionalVO);
 	}
+	
 	
 	public int updateAddition(AdditionalVO additionalVO) {
 		return additionalMapper.updateAddition(additionalVO);

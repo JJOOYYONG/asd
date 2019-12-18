@@ -186,6 +186,31 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
+	@GetMapping("updateMember")
+	public String updateMember(String email,Model model) {
+		MemberVO memberVO = memberService.getMemberByEmail(email);
+		model.addAttribute("members",memberVO);
+		
+		return "member/updateMember";
+	}
+	
+	@PostMapping("updateMember")
+	public ResponseEntity<String> updateMember(String email, MemberVO memberVO) {
+		
+				
+		memberService.updateMember(memberVO);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "text/html; charset=UTF-8");
+		StringBuilder sb = new StringBuilder();
+		sb.append("<script>");
+		sb.append("alert('" + "회원정보가 수정되었습니다." + "');");
+		sb.append("location.href='/member/mypage';");
+		sb.append("</script>");
+		
+		return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+	}
+	
 	@GetMapping("additional")
 	public String additional(String email, Model model) {
 		AdditionalVO additionalVO = memberService.getAddtionByUnum(memberService.getMemberByEmail(email).getUnum());
