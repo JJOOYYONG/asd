@@ -134,16 +134,16 @@ public class MemberService {
 		return latLngMapper.updateLatLng(latLngVO);
 	}
 	
-	public int removeLatLng() {
-		return latLngMapper.removeLatLng();
+	public int removeLatLng(int unum) {
+		return latLngMapper.removeLatLng(unum);
 	}
 	
 	public boolean isLatLngExist(int unum) {
 		return 1 == latLngMapper.countLatLngByUnum(unum);
 	}
 	
-	public List<LatLngVO> getLatLngAll() {
-		return latLngMapper.getLatLngAll();
+	public List<LatLngVO> getLatLngAll(int unum) {
+		return latLngMapper.getLatLngAll(unum);
 	}
 	
 }

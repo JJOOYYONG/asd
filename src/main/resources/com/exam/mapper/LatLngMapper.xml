@@ -20,7 +20,7 @@
 	
 	<update id="removeLatLng" parameterType="LatLngVO">
 		UPDATE lat_lng
-		SET lat=#{0.0},lng=#{0.0}
+		SET lat=0,lng=0
 		WHERE unum=#{unum}
 	</update>
 </mapper>

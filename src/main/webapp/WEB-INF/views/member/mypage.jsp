@@ -112,32 +112,14 @@
 	<!-- kakao JS -->
 	<script type="text/javascript"
 	   src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=4820dee17d15845074a3087a1a27ea0c&libraries=services"></script>
+	
+	<script src="/resources/script/latLng.js"></script>
 	<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", getPositions);
 	
-	
-	
-// 	document.addEventListener("DOMContentLoaded", getPositions(oneNear(35.163826,129.055451), twoNear(35.156034,129.058726)));
-	document.addEventListener("DOMContentLoaded", getPositions());
-	
-// 	// 1번째 유저의 경도위도 위치값을 받아 저장하는 함수
-// 	function oneNear(oneLat, oneLong) {
-// 		var one = [];
-// 		one.push(oneLat);
-// 		one.push(oneLong);
-// 		return one;
-// 	}
-	
-// 	// 2번째 유저의 경도위도 위치값을 받아 저장하는 함수
-// 	function twoNear(twoLat, twoLong) {
-// 		var two = [];
-// 		two.push(twoLat);
-// 		two.push(twoLong);
-// 		return two;
-// 	}
-	
-// 	var currentPos = [];
-	
-// 	function getPositions(oneNear, twoNear) {
+	var email = '${email}';
+	console.log('email: '+email);
+
 	function getPositions() {
 		
 		// 현재 위치값을 가진 지도 표시 함수(최대 2명 추가)
@@ -145,21 +127,7 @@
 		
 			var latitud = position.coords.latitude;
 			var longitude = position.coords.longitude;
-			
-			oneNear = [0,0];
-			twoNear = [35.156034,129.058726]
-// 			currentPos = [latitud,longitude];
-			
-			$.ajax({
-				type: "POST",
-				url: "/member/latLng",
-				data: {lat: latitud, lng: longitude},
-				dataType: "json",
-				success: function (data) {
-					oneNear[0] = data[0];
-					oneNear[1] = data[1];
-				}
-			});
+			console.log('현재사용자 위치 - ' + latitud + ' : ' + longitude);
 			
 			var mapContainer = document.getElementById("map") // 지도를 표시할 DIV
 			var mapOption = {
@@ -174,21 +142,45 @@
 			
 			// 마커를 표시할 위치와 content 객체 배열입니다 
 			var positions = [
-				{ //여기서 부터 현재 위치 경도,위도 찍힙니당,
+				{
 					content : '<div>내 위치</div>',
 					latlng : new kakao.maps.LatLng(latitud, longitude)
 				},
-				{
-					content : '<div>1</div>',
-					latlng : new kakao.maps.LatLng(oneNear[0], oneNear[1])
-				},
-				{
-					content : '<div>2</div>',
-					latlng : new kakao.maps.LatLng(twoNear[0], twoNear[1])
-				}
 				
 			];
+			
+// 			// REST START
+			var instance = [];
+			latLngService.unum(email, function(unum) {
+				var currentPos = {lat:latitud, lng:longitude, unum:unum};
+				
+				latLngService.add(currentPos, function(result) {
+					console.log('dbInsert: '+currentPos);
+				});
+				
+				latLngService.getList({unum:unum}, function(list) {
+					var i = 0
+					for (var item of list) {
+						console.log('typeof item.lat : ' + typeof item.lat);
+						console.log(item.lat + ' : ' + item.lng);
+						
+						i++;
+						positions.push({
+							content : '<div>near'+i+'</div>',
+							latlng : new kakao.maps.LatLng(item.lat, item.lng)
+						});
+					}
+					console.log('getList: '+positions);
+					
+					
+					showMarkers();
+					
+					
+				});
+			});
+// 			// REST END
 			   
+		function showMarkers() {
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 			
@@ -233,7 +225,7 @@
 						}
 					}(infowindow, marker)
 				);
-			}
+			} // for
 			
 			// 지도에 표시할 원을 생성합니다
 			var circle = new kakao.maps.Circle({
@@ -250,19 +242,23 @@
 			
 			// 지도에 원을 표시합니다 
 			circle.setMap(map);
-		}
+		} // showMarkers
+	
+	
+
+		} // getLocation
 		
 		// 현재 위치가 존재할때, 지도맵 실행
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
 				getLocation, function(error) {
-					consol.log(error.message);
+					console.log(error.message);
 				}
 			);
 		} else {
-			consol.log("Geolocation을 지원하지 않는 브라우저 입니다.");
+			console.log("Geolocation을 지원하지 않는 브라우저 입니다.");
 		}
-	}
+	} // getPositions
 	</script>
 </body>
 </html>

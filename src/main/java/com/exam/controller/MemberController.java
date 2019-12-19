@@ -41,10 +41,12 @@ import com.exam.domain.MemberVO;
 import com.exam.service.AttachService;
 import com.exam.service.MemberService;
 
+import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @RequestMapping("member")
+@Log4j
 public class MemberController {
 
 	@Autowired
@@ -161,8 +163,15 @@ public class MemberController {
 	}
 
 	@GetMapping("logout")
-	public ResponseEntity<String> logout(HttpSession session) {
+	public ResponseEntity<String> logout(String email, HttpSession session) {
+		log.info("email: "+email);
+		int unum = memberService.getMemberByEmail(email).getUnum();
+		if (memberService.isLatLngExist(unum)) {
+			memberService.removeLatLng(unum);
+		}
+		
 		session.invalidate();
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
 

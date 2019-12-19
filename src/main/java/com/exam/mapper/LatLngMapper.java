@@ -13,10 +13,10 @@ public interface LatLngMapper {
 	
 	public int updateLatLng(LatLngVO latLngVO);
 	
-	public int removeLatLng();
+	public int removeLatLng(int unum);
 	
-	@Select("SELECT * FROM lat_lng")
-	public List<LatLngVO> getLatLngAll();
+	@Select("SELECT * FROM lat_lng WHERE unum <> #{unum} AND lat <> 0 AND lng <> 0")
+	public List<LatLngVO> getLatLngAll(int unum);
 	
 	@Select("SELECT COUNT(*) FROM lat_lng WHERE unum=#{unum}")
 	public int countLatLngByUnum(int unum);
