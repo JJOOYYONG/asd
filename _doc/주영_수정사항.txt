@@ -1,0 +1,20 @@
+2019_12_17 : 주영 수정
+
+-16일기준 마스터 브렌치 병합
+-homecontroller : 
+@Autowired private AttachService attachService 추가
+@getMapping ("/popup") 추가
+getAttaches 에서 String 타입으로 받는 getAttchpic으로 변경
+(AttachService 및 mapper에도 추가)
+about,pricing,contact,main2,yourpage 쓰지않는 페이지 주석 처리 및 삭제                         
+		
+-attachMapper:
+쿼리문 attach 오타 attachs 로수정
+attach_data 오타 attach_date 로 수정
+
+-main : popup ajax 문장 추가, cardimage 클래스 태그 추가, data-num태그 추가
+
+-기본수정 버튼 링크 x
+----------------------------------------------------------------------------
+
+

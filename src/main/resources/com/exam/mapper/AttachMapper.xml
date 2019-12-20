@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exam.mapper.AttachMapper">
+
 	<insert id="insertAttach" parameterType="AttachVO">
 		INSERT INTO attachs (
 			uuid,filetype,path,name,attach_date,unum
@@ -13,4 +14,5 @@
 			current_date(),#{unum}
 		)
 	</insert>
+
 </mapper>

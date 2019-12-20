@@ -36,7 +36,7 @@ public class MemberService {
 	
 	// 회원정보 수정
 	public void updateMember(MemberVO memberVO) {
-		memberMapper.updateMember(memberVO);
+		 memberMapper.updateMember(memberVO);
 	}
 	
 	// 성공 : 1, 실패 : 0, 아이디없음 : -1
@@ -114,6 +114,7 @@ public class MemberService {
 		return additionalMapper.insertAddition(additionalVO);
 	}
 	
+	
 	public int updateAddition(AdditionalVO additionalVO) {
 		return additionalMapper.updateAddition(additionalVO);
 	}
@@ -122,10 +123,6 @@ public class MemberService {
 		additionalMapper.deleteAddition(unum);
 	}
 
-	public boolean isAdditionExist(int unum) {
-		return additionalMapper.countAdditionByUnum(unum)!=0;
-	}
-	
 	public int insertLatLng(LatLngVO latLngVO) {
 		return latLngMapper.insertLatLng(latLngVO);
 	}
@@ -146,4 +143,9 @@ public class MemberService {
 		return latLngMapper.getLatLngAll(unum);
 	}
 	
+
+	public boolean isAdditionExist(int unum) {
+		return additionalMapper.countAdditionByUnum(unum)!=0;
+	}
+
 }

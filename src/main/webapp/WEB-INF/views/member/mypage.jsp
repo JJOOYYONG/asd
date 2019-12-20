@@ -85,7 +85,7 @@
 					<input type="button" value="추가정보 입력/수정" class="btn btn-info col-md-offset-4 col-md-4"
 					onclick="location.href='/member/additional?email=${email}'">
 					<input type="button" value="기본정보 수정" class="btn btn-info col-md-offset-4 col-md-4"
-					onclick="">
+					onclick="location.href='/member/updateMember?email=${email}'">
 				</div>
 			</div>
 		</div>
