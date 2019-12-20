@@ -41,10 +41,12 @@ import com.exam.domain.MemberVO;
 import com.exam.service.AttachService;
 import com.exam.service.MemberService;
 
+import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @RequestMapping("member")
+@Log4j
 public class MemberController {
 
 	@Autowired
@@ -161,8 +163,15 @@ public class MemberController {
 	}
 
 	@GetMapping("logout")
-	public ResponseEntity<String> logout(HttpSession session) {
+	public ResponseEntity<String> logout(String email, HttpSession session) {
+		log.info("email: "+email);
+		int unum = memberService.getMemberByEmail(email).getUnum();
+		if (memberService.isLatLngExist(unum)) {
+			memberService.removeLatLng(unum);
+		}
+		
 		session.invalidate();
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
 
@@ -285,37 +294,7 @@ public class MemberController {
 		
 		return "member/mypage";
 	}
-	
-	@PostMapping(value = "latLng", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	@ResponseBody
-	public ResponseEntity<String> latLng(
-			@RequestParam("lat")double lat,
-			@RequestParam("lng")double lng,
-			String email) {
-		int unum = memberService.getMemberByEmail(email).getUnum();
-		LatLngVO latLngVO = new LatLngVO();
-		latLngVO.setLat(lat);
-		latLngVO.setLng(lng);
-		latLngVO.setUnum(unum);
-		
-		int count = 0;
-		if (memberService.isLatLngExist(unum)) {
-			count = memberService.updateLatLng(latLngVO);
-		} else {
-			count = memberService.insertLatLng(latLngVO);
-		}
-		
-		ResponseEntity<String> entity = null;
-		if (count > 0) {
-			entity = new ResponseEntity<String>("success", HttpStatus.OK);
-		} else {
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return entity;
-	}
-	
-	
+
 	private boolean isImageType(File file) throws Exception {
 		boolean isImageType=false;
 		

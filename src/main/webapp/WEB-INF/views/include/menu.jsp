@@ -30,7 +30,7 @@
 			<ul>
 				<li class="active"><a href="/">Home</a></li>
 				<li><a href="/member/mypage?email=${email}">My Page</a></li>
-				<li><a href="/member/logout">Logout</a></li>
+				<li><a href="/member/logout?email=${email}">Logout</a></li>
 				<li><a href="/main2">Test Page</a></li>
 			</ul>
 
